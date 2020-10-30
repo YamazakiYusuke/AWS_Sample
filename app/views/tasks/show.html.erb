@@ -1,12 +1,12 @@
 <p>
-  <strong>タイトル:</strong>
+  <strong><%= t('activerecord.blog.title') %></strong>
   <%= @task.title %>
 </p>
 
 <p>
-  <strong>内容:</strong>
+  <strong><%= t('activerecord.blog.content') %></strong>
   <%= @task.content %>
 </p>
 
-<%= link_to '編集', edit_task_path(@task) %> |
-<%= link_to '戻る', tasks_path %>
+<%= link_to(t('activerecord.blog.edit') , edit_task_path(@task)) %> |
+<%= link_to(t('activerecord.blog.back'), tasks_path) %>

@@ -1,6 +1,6 @@
-<h1>タスク編集</h1>
+<h1><%= t('activerecord.blog.edit_task') %></h1>
 
 <%= render 'form', task: @task %>
 
-<%= link_to '詳細', @task %> |
-<%= link_to '戻る', tasks_path %>
+<%= link_to(t('activerecord.blog.show'), @task) %> 
+<%= link_to(t('activerecord.blog.back'), tasks_path) %>
