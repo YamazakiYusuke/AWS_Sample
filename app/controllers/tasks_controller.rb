@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = Task.all.order(created_at: :desc)
   end
 
   def show
@@ -20,7 +20,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: '新しいタスクを登録しました' }
+        format.html { redirect_to tasks_path, notice: '新しいタスクを登録しました' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
