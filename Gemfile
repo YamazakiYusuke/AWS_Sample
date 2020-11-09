@@ -37,6 +37,11 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'webdrivers'
+  gem 'capybara-screenshot'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'faker'
+
+gem 'kaminari'

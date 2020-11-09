@@ -1,30 +1,49 @@
 <h1><%= t 'activerecord.blog.index_tasks' %></h1>
 
-<table>
-  <thead>
-    <tr>
-      <th><%= t 'activerecord.blog.update' %></th>
-      <th><%= t 'activerecord.blog.title' %></th>
-      <th><%= t 'activerecord.blog.content' %></th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class = "index_form_container">
+  <%= form_with(model: Task.new, url: tasks_path, method: :get, local:true) do |f| %>
+    <div>
+      <%= f.label(t('activerecord.blog.title')) %>
+      <%= f.text_field :sarch_title %>
+    </div>
+      
+    <div>
+      <%= f.label(t('activerecord.blog.status')) %>
+      <%= f.select :sarch_status, ['未着手','着手中','完了'], include_blank: true, selected: "" %>
+      <%= f.submit'検索' %>
+    </div>
+  <% end %>
+</div>
 
-  <tbody>
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.updated_at.strftime("%Y-%m-%d %H:%M") %></td>
-        <td><%= task.title %></td>
-        <td><%= task.content %></td>
-        <td><%= link_to(t('activerecord.blog.show'), task_path(id:task.id)) %></td>
-        <td><%= link_to(t('activerecord.blog.edit'), edit_task_path(id:task.id)) %></td>
-        <td><%= link_to(t('activerecord.blog.delete'), task_path(id:task.id), method: :delete, data: { confirm: t('activerecord.blog.are_you_sure_to_delete') }) %></td>
+<div class="index_table_container container">
+  <table>
+    <thead>
+      <tr class="row">
+        <th class="col-xs-4 col-sm-2 col-md-1 col-xs-ga"><%= t 'activerecord.blog.title' %></th>
+        <th class="col-xs-4 col-sm-2 col-md-1"><%= t 'activerecord.blog.content' %></th>
+        <th class="hidden-xs hidden-sm col-md-1"><%= link_to(t('activerecord.blog.limit_sort'), tasks_path(sort_expired: "true")) %></th>
+        <th class="hidden-xs col-sm-2 col-md-1"><%= t 'activerecord.blog.status' %></th>
+        <th class="col-xs-1 col-sm-2 col-md-1"><%= link_to(t('activerecord.blog.priority_sort'), tasks_path(sort_priority: "true")) %></th>
+        <th coldiv="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
+    <tbody>
+      <% @tasks.each do |task| %>
+        <tr class = "row">
+          <td class="col-xs-4 col-sm-2 col-md-2"><%= task.title %></td>
+          <td class="col-xs-4 col-sm-2 col-md-2"><%= task.content %></td>
+          <td class="hidden-xs hidden-sm col-md-2"><%= task.limit.strftime("%Y-%m-%d %H:%M") %></td>
+          <td class="hidden-xs col-sm-1 col-md-1"><%= task.status %></td>
+          <td class="col-xs-1 col-sm-1 col-md-1"><%= task.priority %></td>
+          <td class="col-xs-1 col-sm-1 col-md-1"><%= link_to(t('activerecord.blog.show'), task_path(id:task.id)) %></td>
+          <td class="col-xs-1 col-sm-1 col-md-1"><%= link_to(t('activerecord.blog.edit'), edit_task_path(id:task.id)) %></td>
+          <td class="col-xs-1 col-sm-1 col-md-1"><%= link_to(t('activerecord.blog.delete'), task_path(id:task.id), method: :delete, data: { confirm: t('activerecord.blog.are_you_sure_to_delete') }) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 <br>
-
-
-<%= link_to(t('activerecord.blog.add_new_task'), new_task_path) %>
+<div id = "index_new"><%= link_to(t('activerecord.blog.add_new_task'), new_task_path) %></div>
+<br>
+<div id = "index_paginate"><%= paginate @tasks %></div>

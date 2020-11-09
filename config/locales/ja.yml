@@ -9,11 +9,16 @@ ja:
     blog:
       title: タイトル
       content: 内容
+      limit: 終了期限
+      limit_sort: 終了期限▽
       show: 詳細
       edit: 編集
       delete: 削除
       back: 戻る
       update: 最終更新
+      status: ステータス
+      priority: 優先度
+      priority_sort: 優先度▽
       edit_task: タスクを編集
       index_tasks: タスク一覧
       add_new_task: 新しいタスクを作成

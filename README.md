@@ -43,4 +43,20 @@ Things you may want to cover:
 
 `$ heroku open`
 
+$ git remote -v 
+
+$ git remote set-url heroku https://limitless-sea-53558.herokuapp.com/.git
+
+$ rails assets:precompile RAILS_ENV=production
+
+$ heroku buildpacks:set heroku/ruby
+
+$ heroku buildpacks:add --index 1 heroku/nodejs
+
+$ git push heroku master
+
+$ heroku run rails db:migrate
+
+$ heroku open
+
 * ...

@@ -20,6 +20,21 @@
     <%= form.text_area(:content) %>
   </div>
 
+  <div class="field">
+    <%= form.label(t('activerecord.blog.limit')) %>
+    <%= form.date_field(:limit) %>
+  </div>
+
+  <div class="field">
+    <%= form.label(t('activerecord.blog.status')) %>
+    <%= form.select :status, ['未着手','着手中','完了'], include_blank: true, selected: "" %>
+  </div>
+
+  <div class="field">
+    <%= form.label(t('activerecord.blog.priority')) %>
+    <%= form.select :priority, ['低','中','高'], include_blank: true, selected: "" %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

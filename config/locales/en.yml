@@ -9,11 +9,14 @@ en:
     blog:
       title: Title
       content: Content
+      limit: Limit▽
       show: Show
       edit: Edit
       delete: Delete
       back: Back
-      update: "Last update"
+      update: "Last update▽"
+      status: Status
+      priority: Priority
       edit_task: "Edit task"
       index_tasks: "All tasks"
       add_new_task: "Create a new task"
