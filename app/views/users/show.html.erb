@@ -1,0 +1,11 @@
+<h2><%= @user.name %>のプロフィール</h2>
+<div class="user_info_container">
+  <p>
+    <strong>登録メールアドレス</strong>
+    <%= @user.email %>
+  </p>
+</div>
+<div class="operation_box">
+  <%= link_to 'プロフィール編集へ', edit_user_path(@user) %> 
+  <%= link_to '戻る', taks_path %>
+</div>

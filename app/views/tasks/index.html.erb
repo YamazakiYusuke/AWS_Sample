@@ -44,6 +44,6 @@
     </tbody>
   </table>
 <br>
-<div id = "index_new"><%= link_to(t('activerecord.blog.add_new_task'), new_task_path) %></div>
+<div id = "index_new"><%= link_to(t('activerecord.blog.add_new_task'), new_task_path, class: "btn btn-primary") %></div>
 <br>
 <div id = "index_paginate"><%= paginate @tasks %></div>
