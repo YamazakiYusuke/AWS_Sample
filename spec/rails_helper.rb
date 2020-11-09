@@ -17,4 +17,8 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
 
   config.filter_rails_from_backtrace!
+
+  # if example.metadata[:type] == :feature and example.exception
+  #   page.save_screenshot 'screenshot/テスト失敗時スクリーンショット.png'
+  # end 
 end

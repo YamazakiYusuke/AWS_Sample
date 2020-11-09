@@ -8,5 +8,25 @@
   <%= @task.content %>
 </p>
 
+<p>
+  <strong><%= t('activerecord.blog.limit') %></strong>
+  <%= @task.limit.strftime("%Y-%m-%d %H:%M") %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.blog.update') %></strong>
+  <%= @task.updated_at.strftime("%Y-%m-%d %H:%M") %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.blog.status') %></strong>
+  <%= @task.status %>
+</p>
+
+<p>
+  <strong><%= t('activerecord.blog.priority') %></strong>
+  <%= @task.priority %>
+</p>
+
 <%= link_to(t('activerecord.blog.edit') , edit_task_path(@task)) %> |
 <%= link_to(t('activerecord.blog.back'), tasks_path) %>

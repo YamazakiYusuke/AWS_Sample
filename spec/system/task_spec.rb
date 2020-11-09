@@ -8,11 +8,13 @@ RSpec.describe 'タスク管理機能', type: :system do
           visit new_task_path
           fill_in 'task[title]', with: 'テストタイトル'
           fill_in 'task[content]', with: 'テストコンテンツ'
+          select '未着手', from: 'task[status]'
 
           click_on '登録する'
 
           expect(page).to have_content 'テストタイトル'
           expect(page).to have_content 'テストコンテンツ'
+          expect(page).to have_content '未着手'
         end
       end
     end
@@ -20,8 +22,8 @@ RSpec.describe 'タスク管理機能', type: :system do
 
   describe '一覧表示機能' do
     before do
-      task = FactoryBot.create(:task, title: 'task')
-      task = FactoryBot.create(:task, title: 'newest')
+      FactoryBot.create(:task, title: 'task',limit: '2021-11-04 07:30:25', priority: '低' )
+      FactoryBot.create(:task, title: 'newest',limit: '2021-10-04 07:30:25', priority: '高' )
       visit tasks_path
     end
 
@@ -33,11 +35,23 @@ RSpec.describe 'タスク管理機能', type: :system do
     
     context 'タスクが作成日時の降順に並んでいる場合' do
       it '新しいタスクが一番上に表示される' do
-        # expect(page).to have_content 'newest'
-        # task_list = all('tbody tr') 
         expect(all('tbody tr')[0]).to have_content 'newest'
-        # expect(page).to have_selector 'tbody tr', text: 'newest'
-        # expect.first('tbody tr').to have_content 'newest'
+      end
+    end
+
+    context 'タスクが終了期限の降順に並んでいる場合' do
+      # ↓ テスト結果不安定 failure 時、スクショを確認しても失敗の要因確認できず
+      it '終了期限で降順で表示される' do
+        click_on '終了期限▽'
+        expect(all('tbody tr')[0]).to have_content 'task'
+      end
+    end
+
+    context 'タスクが優先順位の降順に並んでいる場合' do
+      # ↓ テスト結果不安定 failure 時、スクショを確認しても失敗の要因確認できず
+      it '優先順位で降順で表示される' do
+        click_on '優先度▽'
+        expect(all('tbody tr')[0]).to have_content 'newest'
       end
     end
   end
@@ -45,11 +59,44 @@ RSpec.describe 'タスク管理機能', type: :system do
   describe '詳細表示機能' do
     context '任意のタスク詳細画面に遷移した場合' do
       it '該当タスクの内容が表示される' do
-        task = FactoryBot.create(:task)
+        FactoryBot.create(:task)
         visit tasks_path
         click_on '詳細'
         expect(page).to have_content 'Factoryで作ったデフォルトのタイトル１'
         expect(page).to have_content 'Factoryで作ったデフォルトのコンテント１'
+      end
+    end
+  end
+
+  describe '検索機能' do
+    before do
+      FactoryBot.create(:task, title: "task")
+      FactoryBot.create(:second_task, title: "sample", status: '着手中')
+      FactoryBot.create(:task, title: "GoToTravel", status: '未着手')
+      FactoryBot.create(:task, title: "GoToTravel", status: '着手中')
+      visit tasks_path
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        fill_in 'task[sarch_title]', with: 'tas'
+        click_on '検索'
+        expect(page).to have_content 'task'
+      end
+    end
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        select '未着手', from: 'task[sarch_status]'
+        click_on '検索'
+        expect(page).to have_content 'task'
+      end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        fill_in 'task[sarch_title]', with: 'GoTo'
+        select '未着手', from: 'task[sarch_status]'
+        click_on '検索'
+        expect(page).to have_content 'GoToTravel'
+        expect(page).to have_content '未着手'
       end
     end
   end
