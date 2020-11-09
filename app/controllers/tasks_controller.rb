@@ -81,7 +81,7 @@ class TasksController < ApplicationController
     end
 
     def task_params
-      params.require(:task).permit(:title, :content, :limit, :status)
+      params.require(:task).permit(:title, :content, :limit, :status, :priority)
     end
 
     def unless_logged_in?
