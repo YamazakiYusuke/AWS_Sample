@@ -74,14 +74,20 @@
 
 .yield_container {
   height: 1000px;
+  width: 100%;
+  text-align: center;
 }
 
-
+.site-header{
+  height: 5rem;
+}
 
 footer {
   background-color: #def7ff;
   height: 5rem;
 }
+
 footer .copyright p{
   text-align: center;
 }
+

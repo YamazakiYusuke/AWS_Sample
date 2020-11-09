@@ -10,27 +10,27 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="field task_show task_show_top">
     <%= form.label(t('activerecord.blog.title')) %>
     <%= form.text_field(:title) %>
   </div>
 
-  <div class="field">
+  <div class="field task_show">
     <%= form.label(t('activerecord.blog.content')) %>
     <%= form.text_area(:content) %>
   </div>
 
-  <div class="field">
+  <div class="field task_show">
     <%= form.label(t('activerecord.blog.limit')) %>
     <%= form.date_field(:limit) %>
   </div>
 
-  <div class="field">
+  <div class="field task_show">
     <%= form.label(t('activerecord.blog.status')) %>
     <%= form.select :status, ['未着手','着手中','完了'], include_blank: true, selected: "" %>
   </div>
 
-  <div class="field">
+  <div class="field task_show">
     <%= form.label(t('activerecord.blog.priority')) %>
     <%= form.select :priority, ['低','中','高'], include_blank: true, selected: "" %>
   </div>

@@ -35,3 +35,17 @@ h1 {
 .index_table_container .row {
   border-bottom: solid 1px black;
 }
+
+.task_show_top{
+  margin-top: 3rem;
+}
+
+.task_show{
+  margin-bottom: 2rem;
+}
+
+.field_with_errors {
+  display: contents;
+  margin-left: 30px;
+  width: 100%;
+}
