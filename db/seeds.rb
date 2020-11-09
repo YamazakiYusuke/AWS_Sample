@@ -1,6 +1,10 @@
 
 20.times do |n|
-  fake_name = Faker::Name.name 
+  fake_name = Faker::Name.name
+  email = Faker::Internet.email
+  pass = 'abcdfghi'
+  password = pass.chars.shuffle.join
+  user_id = n - 1 #<= 問題がある
 
   title = ['テスト勉強する','カニ食べる','旅行に行く','買い物に行く'].sample
   content = "#{fake_name}は#{title}"
@@ -8,6 +12,13 @@
   limit = Faker::Time.between(from: DateTime.now - 100, to: DateTime.now)
   status = ['未着手','着手中','完了'].sample
   priority = ['低','中','高'].sample
+
+  User.create!(
+    name: fake_name,
+    email: email,
+    password: password,
+    user_id: user_id #<= 問題がある
+  )
 
   Task.create!(
     title: title,

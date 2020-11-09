@@ -1,11 +1,14 @@
-<h2><%= @user.name %>のプロフィール</h2>
+<h2><%= @user.name %>のアカウント情報</h2>
 <div class="user_info_container">
   <p>
-    <strong>登録メールアドレス</strong>
+    <strong>全タスク数 </strong>
+    <%= @user.tasks.size %>
+  </p>
+  <p>
+    <strong>登録メールアドレス </strong>
     <%= @user.email %>
   </p>
 </div>
 <div class="operation_box">
-  <%= link_to 'プロフィール編集へ', edit_user_path(@user) %> 
-  <%= link_to '戻る', taks_path %>
+  <%= link_to '戻る', tasks_path %>
 </div>

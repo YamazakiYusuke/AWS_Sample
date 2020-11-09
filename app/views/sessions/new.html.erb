@@ -1,5 +1,7 @@
 
 <h2>ログインフォーム</h2>
+<br>
+<br>
 <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
   <div class="session_input_box">
     <div class="sessions_new">
@@ -10,6 +12,7 @@
       <%= f.label :パスワード %>
       <%= f.password_field :password %>
     </div>
+    <br>
     <p class="sessions_login"><%= f.submit "ログイン", class:"btn-square" %></p>
   </div>
 <% end %>
