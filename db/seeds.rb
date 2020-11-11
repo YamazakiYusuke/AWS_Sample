@@ -1,24 +1,32 @@
-
-20.times do |n|
+10.times do |n|
   fake_name = Faker::Name.name
   email = Faker::Internet.email
-  pass = 'abcdfghi'
-  password = pass.chars.shuffle.join
-  user_id = n - 1 #<= 問題がある
-
-  title = ['テスト勉強する','カニ食べる','旅行に行く','買い物に行く'].sample
-  content = "#{fake_name}は#{title}"
-  updated_at = Faker::Time.between(from: DateTime.now - 100, to: DateTime.now)
-  limit = Faker::Time.between(from: DateTime.now - 100, to: DateTime.now)
-  status = ['未着手','着手中','完了'].sample
-  priority = ['低','中','高'].sample
+  password = 'hogehoge'
+  admin = [false,false,false,false,false,false,false,false,true].sample
 
   User.create!(
     name: fake_name,
     email: email,
     password: password,
-    user_id: user_id #<= 問題がある
+    admin: admin
   )
+end
+
+user_id = []
+users = User.all
+users.each do |user|
+  user_id << user.id
+end
+
+100.times do |n|
+  id = user_id.sample
+  title = ['テスト勉強する','カニ食べる','旅行に行く','買い物に行く'].sample
+  style = ['一生懸命','コツコツと','時々','だらだらと'].sample
+  content = "#{style}は#{title}"
+  updated_at = Faker::Time.between(from: DateTime.now - 100, to: DateTime.now)
+  limit = Faker::Time.between(from: DateTime.now - 100, to: DateTime.now)
+  status = ['未着手','着手中','完了'].sample
+  priority = ['低','中','高'].sample
 
   Task.create!(
     title: title,
@@ -27,5 +35,9 @@
     limit: limit,
     status: status,
     priority: priority,
+    user_id: id 
   )
 end
+
+# UserとTaskはコメントアウトして、片方ずつやる
+# まずUserのデータを作ったら、rails cなどで idの範囲を確認して、taskのuser_idに反映させる

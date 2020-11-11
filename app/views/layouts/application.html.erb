@@ -18,6 +18,7 @@
             menu
           </button>
           <%= link_to "マイページへ", user_path(current_user.id), class: "btn-flat-simple" if current_user %>
+          <%= link_to "管理者画面", admin_users_path, class: "btn-flat-simple" if current_user %>
           <% if logged_in? %>
             <%= link_to "ログアウト", session_path(current_user.id), class: "btn-flat-simple", method: :delete %>
           <% else %>

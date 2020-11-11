@@ -1,4 +1,4 @@
-<h1><%= t 'activerecord.blog.index_tasks' %></h1>
+<h1><%= t('activerecord.blog.index_tasks') %></h1>
 
 <div class = "index_form_container">
   <%= form_with(model: Task.new, url: tasks_path, method: :get, local:true) do |f| %>

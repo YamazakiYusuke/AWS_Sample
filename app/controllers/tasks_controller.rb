@@ -3,34 +3,35 @@ class TasksController < ApplicationController
   before_action :unless_logged_in?, only: [:index, :show]
 
   def index
-
     tasks = current_user.tasks
     if params[:task]
       params_sarch_title = params[:task][:sarch_title]
       params_sarch_status = params[:task][:sarch_status]
 
       if params_sarch_title != "" && params_sarch_status != ""
-        @tasks = tasks.title_scope(params_sarch_title).status_scope(params_sarch_status).page(params[:page]).per(10)
+        @tasks = tasks.title_scope(params_sarch_title).status_scope(params_sarch_status)
       elsif params_sarch_title != ""
-        @tasks = tasks.title_scope(params_sarch_title).page(params[:page]).per(10)
+        @tasks = tasks.title_scope(params_sarch_title)
       elsif params_sarch_status != ""
-        @tasks = tasks.status_scope(params_sarch_status).page(params[:page]).per(10)
+        @tasks = tasks.status_scope(params_sarch_status)
       else
-        @tasks = tasks.page(params[:page]).per(10).order(limit: :desc)
+        @tasks = tasks.order(limit: :desc)
       end
     else
 
       if params["sort_expired"]
-        @tasks = tasks.page(params[:page]).per(10).order(limit: :desc)
+        @tasks = tasks.order(limit: :desc)
       elsif params["sort_priority"]
-        @tasks = tasks.page(params[:page]).per(10).order(priority: :desc)
+        @tasks = tasks.order(priority: :desc)
       else
-        @tasks = tasks.page(params[:page]).per(10).order(created_at: :desc)
+        @tasks = tasks.order(created_at: :desc)
       end
     end
+    @tasks = @tasks.page(params[:page]).per(10)
   end
 
   def show
+    redirect_to tasks_path, notice: '指定のページは表示できません' if current_user.id != @task.id
   end
 
   def new

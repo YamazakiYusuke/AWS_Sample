@@ -8,6 +8,11 @@
     <strong>登録メールアドレス </strong>
     <%= @user.email %>
   </p>
+  <br>
+  <br>
+  <p>
+    <strong><%= p("管理権限があります") if @user.admin %></strong>
+  </p>
 </div>
 <div class="operation_box">
   <%= link_to '戻る', tasks_path %>
