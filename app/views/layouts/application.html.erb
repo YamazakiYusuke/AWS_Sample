@@ -1,45 +1,15 @@
 <!DOCTYPE html>
 <html>
-  <header>
+  <head>
     <title>ManyoKadai</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </header>
+  </head>
 
   <body>
-    <header class="site-header">
-      <div class="wrapper site-header__wrapper">
-        <%= link_to 'Task Maneger', tasks_path, class:"brand" %>
-        <nav class="nav">
-          <button class="nav__toggle" aria-expanded="false" type="button">
-            menu
-          </button>
-          <%= link_to "マイページへ", user_path(current_user.id), class: "btn-flat-simple" if current_user %>
-          <%= link_to "管理者画面", admin_users_path, class: "btn-flat-simple" if current_user %>
-          <% if logged_in? %>
-            <%= link_to "ログアウト", session_path(current_user.id), class: "btn-flat-simple", method: :delete %>
-          <% else %>
-            <%= link_to "新規登録", new_user_path, class: "btn-flat-simple" %>
-            <%= link_to "ログイン", new_session_path, class: "btn-flat-simple" %>
-          <% end %>
-        </nav>
-      </div>
-    </header>
-    <main>
-      <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "#{key}") %>
-      <% end %>
-      <div class = "yield_container">
-        <%= yield %>
-      </div>
-    </main>
-    <footer>
-      <div class="copyright">
-        <p>© 2020 - Task Maneger</p>
-      </div>
-    </footer>
+    <%= yield %>
   </body>
 </html>
